@@ -168,7 +168,7 @@ footer {
   width: 50px;
   height: 50px;
   /* background-color: #222; */
-  background: url("../images/logo/agis1.jpg") 50% 0 repeat-y fixed;
+  background: url("../images/logo/logo-new-opp.png") 50% 0 repeat-y fixed;
   -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
   animation: sk-rotatePlane 1.2s infinite ease-in-out;
   -webkit-background-size: cover;
@@ -211,7 +211,7 @@ footer {
 -----------------------------------------*/
 .custom-navbar {
   margin-bottom: 0;
-  background-color: #064c84;
+  background-color: #000;
 }
 
 .custom-navbar .navbar-brand {
@@ -267,7 +267,7 @@ footer {
     background: 0 0;
   }
   .custom-navbar.top-nav-collapse {
-    background: #064c84;
+    background: #000;
     padding: 0;
   }
 }
