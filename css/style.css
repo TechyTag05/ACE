@@ -118,7 +118,7 @@ footer {
 
 #intro .btn-danger,
 #contact .btn-danger {
-  background: #f2545f;
+  background: #3aad18;
   border-color: transparent;
 }
 
@@ -167,9 +167,13 @@ footer {
 .sk-rotating-plane {
   width: 50px;
   height: 50px;
-  background-color: #222;
+  /* background-color: #222; */
+  background: url("../images/logo/agis1.jpg") 50% 0 repeat-y fixed;
   -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
   animation: sk-rotatePlane 1.2s infinite ease-in-out;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
 }
 
 @-webkit-keyframes sk-rotatePlane {
@@ -207,7 +211,7 @@ footer {
 -----------------------------------------*/
 .custom-navbar {
   margin-bottom: 0;
-  background-color: #101010;
+  background-color: #064c84;
 }
 
 .custom-navbar .navbar-brand {
@@ -229,7 +233,7 @@ footer {
 
 .custom-navbar .nav li a:hover {
   background: transparent;
-  color: #66ccff;
+  color: #3aad18;
 }
 
 .custom-navbar .navbar-nav > li > a:hover,
@@ -239,7 +243,7 @@ footer {
 
 .custom-navbar .nav li.active > a {
   background-color: transparent;
-  color: #66ccff;
+  color: #3aad18;
 }
 
 .custom-navbar .navbar-toggle {
@@ -263,7 +267,7 @@ footer {
     background: 0 0;
   }
   .custom-navbar.top-nav-collapse {
-    background: #101010;
+    background: #064c84;
     padding: 0;
   }
 }
@@ -310,7 +314,7 @@ footer {
 }
 
 #detail .fa {
-  color: #f2545f;
+  color: #3aad18;
   font-size: 48px;
 }
 
@@ -404,7 +408,7 @@ footer {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  color: #f2545f;
+  color: #3aad18;
   cursor: default;
   background-color: transparent;
   border: 1px solid transparent;
@@ -438,7 +442,7 @@ footer {
 }
 
 #register input[type="submit"] {
-  background: #f2545f;
+  background: #3aad18;
   border-radius: 100px;
   border: none;
   color: #ffffff;
@@ -588,7 +592,7 @@ footer {
 }
 
 #contact input[type="submit"]:hover {
-  background: #f2545f;
+  background: #3aad18;
 }
 
 /*---------------------------------------
@@ -600,7 +604,7 @@ footer {
 
 /* Back top */
 .go-top {
-  background-color: #222;
+  background-color: #064c84;
   bottom: 2em;
   right: 2em;
   color: #ffffff;
@@ -616,7 +620,7 @@ footer {
 }
 
 .go-top:hover {
-  background: #f2545f;
+  background: #3aad18;
   color: #ffffff;
 }
 
@@ -648,7 +652,7 @@ footer {
 }
 
 .social-icon li a:hover {
-  background: #f2545f;
+  background: #3aad18;
   color: #ffffff;
 }
 
@@ -675,6 +679,12 @@ footer {
   object-fit: cover;
   width: 100%;
   height: 100%;
+}
+.home-s {
+  color: #064c84;
+}
+.about-s {
+  color: #3aad18;
 }
 
 /*---------------------------------------
