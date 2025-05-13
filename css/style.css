@@ -169,8 +169,8 @@ footer {
   height: 50px;
   /* background-color: #222; */
   background: url("../images/logo/logo-new-opp.png") 50% 0 repeat-y fixed;
-  -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
-  animation: sk-rotatePlane 1.2s infinite ease-in-out;
+  -webkit-animation: sk-rotatePlane 1.8s infinite ease-in-out;
+  animation: sk-rotatePlane 1.8s infinite ease-in-out;
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center center;
@@ -681,10 +681,10 @@ footer {
   height: 100%;
 }
 .home-s {
-  color: #064c84;
+  color: #064c84 !important;
 }
 .about-s {
-  color: #3aad18;
+  color: #3aad18 !important;
 }
 
 /*---------------------------------------
