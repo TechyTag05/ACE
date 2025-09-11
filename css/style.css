@@ -278,7 +278,7 @@ footer {
 -----------------------------------------*/
 #intro {
   /* background: url("../images/intro-bg.jpg") 50% 0 repeat-y fixed; */
-  background-color: #000 !important;
+  /* background-color: #000 !important; */
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center center;
@@ -674,11 +674,11 @@ footer {
 }
 
 .video-wrap {
-  /* z-index: -100; */
+  z-index: -100;
 }
 
 .custom-video {
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
   object-fit: cover;
