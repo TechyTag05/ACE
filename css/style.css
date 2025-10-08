@@ -73,7 +73,6 @@ a {
   padding-bottom: 14rem;
   /* background-image: url("../images/bg2.png"); */
 }
-
 #detail,
 #video,
 #speakers,
@@ -391,6 +390,8 @@ footer {
 
 .nav-tabs {
   margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .nav-tabs > li {
   float: left;
@@ -690,6 +691,22 @@ footer {
 }
 .about-s {
   color: #3aad18 !important;
+}
+
+/* Products */
+.overview-products {
+  /* padding-top: 10rem;
+  padding-bottom: 0rem; */
+  background-image: url("../images/products/p-bg1.jpg");
+}
+.overview-products-home-text {
+  color: #fff !important;
+}
+
+/* Services */
+
+.overview-services {
+  background-image: url("../images/services/s-bg1.jpg");
 }
 
 /*---------------------------------------
