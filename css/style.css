@@ -601,6 +601,15 @@ footer {
   background: #3aad18;
 }
 
+.about-agis-btn {
+  background-color: #3aad18;
+  color: #fff;
+}
+.about-agis-btn:hover {
+  background-color: #3aad18;
+  color: #fff;
+}
+
 /*---------------------------------------
    Footer section              
 -----------------------------------------*/
@@ -707,6 +716,110 @@ footer {
 
 .overview-services {
   background-image: url("../images/services/s-bg1.jpg");
+}
+/* About */
+.overview-about {
+  background-image: url("../images/about/about-bg.jpg");
+}
+.about-d {
+  border-radius: 0rem !important;
+}
+
+/* floating icons */
+
+.btn-social {
+  height: 2.5rem;
+  width: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  /* border-radius: 100%; */
+}
+
+.autoScroll-btn {
+  /* display: none; */
+  cursor: pointer;
+  position: fixed;
+  bottom: 6rem;
+  right: 0rem;
+  z-index: 99;
+  width: 3rem;
+  height: 3rem;
+  /* border-radius: 50%; */
+  background: #064c84;
+  color: white;
+  border: none;
+}
+.autoScroll-btn:hover {
+  color: #fff;
+}
+.autoScroll-cal-btn {
+  cursor: pointer;
+  position: fixed;
+  bottom: 100px;
+  right: 0rem;
+  z-index: 99;
+  width: 3rem;
+  height: 3rem;
+  /* border-radius: 50%; */
+  background: #064c84;
+  color: white;
+  border: none;
+}
+.autoScroll-cal-btn:hover {
+  color: #fff;
+}
+
+.autoScroll-gmail-btn {
+  cursor: pointer;
+  position: fixed;
+  bottom: 14rem;
+  right: 0rem;
+  z-index: 99;
+  width: 3rem;
+  height: 3rem;
+  /* border-radius: 50%; */
+  background-color: #c71610;
+  color: white;
+  border: none;
+}
+.autoScroll-gmail-btn:hover {
+  color: #fff;
+}
+
+.autoScroll-cal-btn {
+  cursor: pointer;
+  position: fixed;
+  bottom: 100px;
+  right: 0rem;
+  z-index: 99;
+  width: 3rem;
+  height: 3rem;
+  /* border-radius: 50%; */
+  background-color: #064c84;
+  color: white;
+  border: none;
+}
+.autoScroll-cal-btn:hover {
+  color: #fff;
+}
+
+.autoScroll-gmail-btn {
+  cursor: pointer;
+  position: fixed;
+  bottom: 14rem;
+  right: 0rem;
+  z-index: 99;
+  width: 3rem;
+  height: 3rem;
+  /* border-radius: 50%; */
+  background: #064c84;
+  color: white;
+  border: none;
+}
+.autoScroll-gmail-btn:hover {
+  color: #fff;
 }
 
 /*---------------------------------------
