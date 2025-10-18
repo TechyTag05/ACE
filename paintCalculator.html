@@ -53,133 +53,79 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="./index.html" class="smoothScroll">Home</a></li>
-                    <li active><a href="./about.html" class="smoothScroll">About</a></li>
+                    <li><a href="./about.html" class="smoothScroll">About</a></li>
                     <li><a href="./products.html" class="smoothScroll">Products</a></li>
                     <li><a href="./services.html" class="smoothScroll">Services</a></li>
-                    <li><a href="./paintCalculator.html" class="smoothScroll">Paint Calculator</a></li>
+                    <li active><a href="./paintCalculator.html" class="smoothScroll">Paint Calculator</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- =========================
-    OVERVIEW SECTION   
-============================== -->
-    <section id="overview" class="parallax-section overview-about">
-        <div class="container">
-            <div class="row">
-                <div class="wow fadeInUp col-md-12 col-sm-12 mb-2 " data-wow-delay="0.6s">
-                    <h2>
-                        <!-- <span class="home-s">Products</span> -->
-                        <span class="about-s">About</span>
-                    </h2>
-                    <p class="overview-products-home-text">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book
-                    </p>
-                    <p class="overview-products-home-text">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                        but also the leap into electronic typesetting, remaining essentially unchanged
-                    </p>
-                </div>
-                <!-- <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-                    <img src="images/overview-img.png" class="img-responsive" alt="Overview" />
-                </div> -->
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================
-    PROGRAM SECTION   
-============================== -->
-    <section id="program" class="parallax-section mt-0">
-        <div class="container">
-            <div class="row">
-
-                <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="0.6s">
-                    <div class="section-title">
-                        <h2>We Are The Leader in The Oil & Gas Coatings!</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                </div>
-                <!-- <section id="overview" class="parallax-section"> -->
-                <div class="container">
-                    <div class="row">
-                        <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-                            <!-- <h3>
-                                    <span class="home-s">About</span>
-                                    <span class="about-s">AGIS</span>
-                                </h3> -->
-                            <p>
-                                A dynamic startup committed to revolutionizing industrial asset
-                                protection. Founded with a vision to set new benchmarks in
-                                excellence, ACE Global is not just a company—it's a venture driven
-                                by passion and innovation.
-                            </p>
-                            <p>
-                                AGIS brings a fresh perspective to the industry. As a startup, we
-                                thrive on creativity, adaptability, and a relentless pursuit of
-                                quality. Our certified professionals form a dedicated team,
-                                delivering a comprehensive suite of services, from cutting-edge
-                                protective coatings to expert training, meticulous surface
-                                preparation, and thorough corrosion audits.
-                            </p>
-                            <p>
-                                Join us on this exciting journey where a startup ethos meets
-                                industrial prowess. Together, let's redefine the future of asset
-                                protection, ensuring that industrial assets not only endure but
-                                thrive.
-                            </p>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                Ipsum has
-                                been the industry's standard dummy text ever since the 1500s, when an unknown
-                                printer took a
-                                galley of type and scrambled it to make a type specimen book.</p>
-                            <p></p>
-                        </div>
-
-                        <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.9s">
-                            <img src="images/About/about-d.jpg" class="img-responsive about-d" alt="Overview" />
-                        </div>
-                    </div>
-                </div>
-                <!-- </section> -->
-            </div>
-    </section>
 
     <!-- =========================
    REGISTER SECTION   
 ============================== -->
     <section id="register" class="parallax-section">
-        <div class="container">
-            <div class="row">
+        <div class="paint-container">
+            <div class="paint-sidebar">
+                <h2>Paint Calculator</h2>
+                <button id="btn1" class="mystyle" onclick="showForm('wft')">> WFT Calculation</button>
+                <!-- <button id="btn2" onclick="showForm('dft')">> DFT Calculation</button>
+                <button id="btn3" onclick="showForm('consumption')">> Paint Consumption</button>
+                <button id="btn4" onclick="showForm('mixing')">> Paint Mixing Ratio</button> -->
+            </div>
 
-                <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="0.6s">
-                    <h2>Watch Us On The Field</h2>
-                    <h3>Hopefully i can inspire and encourage you to try out new ways of building.
-                        This video is a little more technical.</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                        ut laoreet. Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet consectetuer diam
-                        nonummy.</p>
-                </div>
-
-                <div class="wow fadeInUp col-md-6 col-sm-6" data-wow-delay="1s">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/up09R-19jmU"
-                            allowfullscreen></iframe>
+            <div class="form-area">
+                <div id="wft" class="form-content active">
+                    <h3>WFT Calculation</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>DFT*</label><input id="Dft" type="number" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Solid Volume (%)*</label><input id="solidVolume" type="number" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Thinner (%)</label><input id="thinner" type="number" />
+                        </div>
                     </div>
+                    <button class="action" onclick="wftCaculator()">CALCULATE</button>
+                    <button class="action" onclick="reset()">Reset</button>
+                    <h3>Output</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>WFT:</label><input id="wftOutput" type="number" disabled />
+                        </div>
+                    </div>
+                    <button class="action">Generate PDF</button>
                 </div>
-                <div class="col-md-1"></div>
 
+                <div id="dft" class="form-content">
+                    <h3>DFT Calculation</h3>
+                    <label>WFT Value</label><input type="number" />
+                    <label>Solid Volume (%)</label><input type="number" />
+                    <button class="action">CALCULATE</button>
+                </div>
+
+                <div id="consumption" class="form-content">
+                    <h3>Paint Consumption</h3>
+                    <label>Area (m²)</label><input type="number" />
+                    <label>DFT (µm)</label><input type="number" />
+                    <label>Solid Volume (%)</label><input type="number" />
+                    <button class="action">CALCULATE</button>
+                </div>
+
+                <div id="mixing" class="form-content">
+                    <h3>Paint Mixing Ratio</h3>
+                    <label>Base Volume</label><input type="number" />
+                    <label>Hardener Ratio</label><input type="number" />
+                    <label>Thinner Ratio</label><input type="number" />
+                    <button class="action">CALCULATE</button>
+                </div>
             </div>
         </div>
     </section>
-
     <a class="autoScroll-btn btn-dark btn-social mx-2" target="_blank"
         href="https://wa.me/918825594915?text=AGIS...%20Hello!%20Can%20I%20get%20more%20info%20about%20this"
         aria-label="whatsapp"><i class="fa fa-whatsapp"></i></a>
