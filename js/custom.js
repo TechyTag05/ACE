@@ -73,3 +73,77 @@ $(document).ready(function () {
   -------------------------------*/
   new WOW({ mobile: false }).init();
 });
+
+// paint cal
+
+function showForm(formId) {
+  const forms = document.querySelectorAll(".form-content");
+  forms.forEach((form) => form.classList.remove("active"));
+  document.getElementById(formId).classList.add("active");
+}
+function showForm(id) {
+  document.querySelectorAll(".form-content").forEach((form) => {
+    form.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+
+  const buttons = ["btn1", "btn2", "btn3", "btn4"];
+  const activeMap = {
+    wft: "btn1",
+    dft: "btn2",
+    consumption: "btn3",
+    mixing: "btn4",
+  };
+
+  buttons.forEach((btn) => {
+    const element = document.getElementById(btn);
+    element.classList.toggle("mystyle", btn === activeMap[id]);
+  });
+}
+
+function wftCaculator() {
+  const dft =
+    parseFloat(
+      document.querySelectorAll("#wft input[type='number']")[0].value
+    ) || 0;
+  const solidVolume =
+    parseFloat(
+      document.querySelectorAll("#wft input[type='number']")[1].value
+    ) || 0;
+  const thinner =
+    parseFloat(
+      document.querySelectorAll("#wft input[type='number']")[2].value
+    ) || 0;
+
+  if (!dft) {
+    const inputs = document.querySelectorAll("#wft input[type='number']");
+
+    inputs.forEach((input, index) => {
+      if (index <= 1) {
+        input.style.border = "2px solid red";
+        input.style.borderRadius = "2px";
+      }
+    });
+
+    setTimeout(() => {
+      inputs.forEach((input, index) => {
+        if (index <= 1) {
+          input.style.border = "1px solid #000";
+          input.style.borderRadius = "2px";
+        }
+      });
+    }, 3000);
+    return;
+  }
+
+  const wft = (dft * (100 + thinner)) / solidVolume;
+
+  document.getElementById("wftOutput").value = wft ? wft?.toFixed(2) : "";
+}
+
+function reset() {
+  document.querySelectorAll("input[type='number']").forEach((input) => {
+    input.value = "";
+  });
+  document.getElementById("wftOutput").value = "";
+}
