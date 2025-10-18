@@ -822,6 +822,139 @@ footer {
   color: #fff;
 }
 
+/* paint Cal */
+
+.paint-container {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  /* padding-left: 18rem;
+  padding-right: 18rem; */
+  padding: 3rem;
+}
+
+.paint-sidebar {
+  flex: 1 1 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.paint-sidebar button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.paint-sidebar button:hover {
+  background-color: #ccc;
+}
+
+.form-area {
+  flex: 2 1 300px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.form-content {
+  display: none;
+}
+
+.form-content.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+.paint-container {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  color: #000;
+}
+
+.paint-sidebar {
+  flex: 1 1 250px;
+  background-color: #064c84;
+  color: white;
+  padding: 20px;
+}
+
+.paint-sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.paint-sidebar button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+}
+
+.paint-sidebar button:hover {
+  background-color: #3aad18;
+}
+
+.mystyle {
+  background-color: #3aad18 !important;
+  border-radius: 5px;
+}
+
+.form-area {
+  flex: 3 1 500px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.form-content {
+  display: none;
+}
+
+.form-content.active {
+  display: block;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 200;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+button.action {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
 /*---------------------------------------
    Responsive styles            
 -----------------------------------------*/
