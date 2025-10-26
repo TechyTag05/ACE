@@ -71,50 +71,107 @@
             <div class="paint-sidebar">
                 <h2>Paint Calculator</h2>
                 <button id="btn1" class="mystyle" onclick="showForm('wft')">> WFT Calculation</button>
-                <!-- <button id="btn2" onclick="showForm('dft')">> DFT Calculation</button>
+                <button id="btn2" onclick="showForm('paint')">> Paint Coverage</button>
                 <button id="btn3" onclick="showForm('consumption')">> Paint Consumption</button>
+                <!--  
                 <button id="btn4" onclick="showForm('mixing')">> Paint Mixing Ratio</button> -->
             </div>
 
             <div class="form-area">
-                <div id="wft" class="form-content active">
-                    <h3>WFT Calculation</h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>DFT*</label><input id="Dft" type="number" required />
+                <form>
+                    <div id="wft" class="form-content active">
+                        <h3>WFT Calculation</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>DFT in Microns*</label><input id="Dft" type="number" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Volume of solids in (%)*</label><input id="solidVolume" type="number" required
+                                    min="1" max="100" />
+                                <p id="solidError"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Thinner Add (%)</label><input id="thinner" type="number" />
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label>Solid Volume (%)*</label><input id="solidVolume" type="number" required />
+                        <!-- <button type="submit" class="action" onclick="wftCaculator()">CALCULATE</button> -->
+                        <button type="submit" class="action"
+                            onclick="event.preventDefault(); wftCaculator()">CALCULATE</button>
+                        <button class="action" type="button" onclick="reset()">Reset</button>
+                        <h3>Output</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>WFT Target (%)</label><input id="wftOutput" type="number" disabled />
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label>Thinner (%)</label><input id="thinner" type="number" />
-                        </div>
+                        <button class="action">Generate PDF</button>
                     </div>
-                    <button class="action" onclick="wftCaculator()">CALCULATE</button>
-                    <button class="action" onclick="reset()">Reset</button>
-                    <h3>Output</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label>WFT:</label><input id="wftOutput" type="number" disabled />
+                </form>
+
+                <form>
+                    <div id="paint" class="form-content">
+                        <h3>Paint Coverage</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>DFT in Microns*</label><input id="Dft" type="number" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Volume of solids in (%)*</label><input id="solidVolume" type="number" required
+                                    min="1" max="100" />
+                                <p id="paintSolidError"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Loss (%)*</label><input id="loss" type="number" required min="1" max="100" />
+                            </div>
                         </div>
+                        <!-- <button type="submit" class="action" onclick="wftCaculator()">CALCULATE</button> -->
+                        <button type="submit" class="action"
+                            onclick="event.preventDefault(); paintCoverageCalculator()">CALCULATE</button>
+                        <button class="action" type="button" onclick="resetPaint()">Reset</button>
+                        <h3>Output</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Theoritical Coverage:</label><input id="paintOutput" type="text" disabled />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Practical Coverage:</label><input id="paint2Output" type="text" disabled />
+                            </div>
+                        </div>
+                        <button class="action">Generate PDF</button>
                     </div>
-                    <button class="action">Generate PDF</button>
-                </div>
+                </form>
 
-                <div id="dft" class="form-content">
-                    <h3>DFT Calculation</h3>
-                    <label>WFT Value</label><input type="number" />
-                    <label>Solid Volume (%)</label><input type="number" />
-                    <button class="action">CALCULATE</button>
-                </div>
-
-                <div id="consumption" class="form-content">
-                    <h3>Paint Consumption</h3>
-                    <label>Area (m²)</label><input type="number" />
-                    <label>DFT (µm)</label><input type="number" />
-                    <label>Solid Volume (%)</label><input type="number" />
-                    <button class="action">CALCULATE</button>
-                </div>
+                <form>
+                    <div id="consumption" class="form-content">
+                        <h3>Paint Consumption</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Surface Area*</label><input id="surfaceArea" type="number" required />
+                            </div>
+                            <div class="col-md-3">
+                                <label>DFT in Microns*</label><input id="Dft" type="number" required />
+                            </div>
+                            <div class="col-md-3">
+                                <label>Volume of solids in (%)*</label><input id="solidVolume" type="number" required
+                                    min="1" max="100" />
+                                <p id="paint2SolidError"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Loss (%)*</label><input id="loss" type="number" required min="1" max="100" />
+                            </div>
+                        </div>
+                        <button type="submit" class="action"
+                            onclick="event.preventDefault(); paintConsumptionCalculator()">CALCULATE</button>
+                        <button class="action" type="button" onclick="resetConsumption()">Reset</button>
+                        <h3>Output</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Paint Consumption:</label><input id="consumptionOutput" type="text" disabled />
+                            </div>
+                        </div>
+                        <button class="action">Generate PDF</button>
+                    </div>
+                </form>
 
                 <div id="mixing" class="form-content">
                     <h3>Paint Mixing Ratio</h3>
@@ -149,7 +206,7 @@
 
                     <ul class="social-icon">
                         <li>
-                            <a href="https://www.google.com/url?q=https%3A%2F%2Fwa.me%2F%2B918825833728&amp;sa=D&amp;sntz=1&amp;usg=AOvVaw2ddfHmShexw2yIVbmWnftR"
+                            <a href="https://www.google.com/url?q=https%3A%2F%2Fwa.me%2F%2B+918825833728&amp;sa=D&amp;sntz=1&amp;usg=AOvVaw2ddfHmShexw2yIVbmWnftR"
                                 class="fa fa-whatsapp wow fadeInUp" data-wow-delay="1s" target="_blank"></a>
                         </li>
                         <li>
