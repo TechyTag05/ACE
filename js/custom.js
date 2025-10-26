@@ -76,12 +76,22 @@ $(document).ready(function () {
 
 // paint cal
 
-function showForm(formId) {
-  const forms = document.querySelectorAll(".form-content");
-  forms.forEach((form) => form.classList.remove("active"));
-  document.getElementById(formId).classList.add("active");
-}
+// function showForm(formId) {
+//   const forms = document.querySelectorAll(".form-content");
+//   forms.forEach((form) => form.classList.remove("active"));
+//   document.getElementById(formId).classList.add("active");
+// }
 function showForm(id) {
+  if (id === "wft") {
+    resetPaint();
+    resetConsumption();
+  } else if (id === "paint") {
+    reset();
+    resetConsumption();
+  } else if (id === "consumption") {
+    reset();
+    resetPaint();
+  }
   document.querySelectorAll(".form-content").forEach((form) => {
     form.classList.remove("active");
   });
@@ -90,14 +100,14 @@ function showForm(id) {
   const buttons = ["btn1", "btn2", "btn3", "btn4"];
   const activeMap = {
     wft: "btn1",
-    dft: "btn2",
+    paint: "btn2",
     consumption: "btn3",
-    mixing: "btn4",
+    // mixing: "btn4",
   };
 
   buttons.forEach((btn) => {
     const element = document.getElementById(btn);
-    element.classList.toggle("mystyle", btn === activeMap[id]);
+    element?.classList?.toggle("mystyle", btn === activeMap[id]);
   });
 }
 
@@ -110,17 +120,25 @@ function wftCaculator() {
     parseFloat(
       document.querySelectorAll("#wft input[type='number']")[1].value
     ) || 0;
+  if (solidVolume >= 100) {
+    setTimeout(() => {
+      document.getElementById("solidError").innerText = "";
+    }, 2000);
+    document.getElementById("solidError").style.color = "#dc3545";
+    return (document.getElementById("solidError").innerText =
+      "Solid Volume cannot exceed 100%");
+  }
   const thinner =
     parseFloat(
       document.querySelectorAll("#wft input[type='number']")[2].value
     ) || 0;
 
-  if (!dft) {
+  if (!dft || !solidVolume) {
     const inputs = document.querySelectorAll("#wft input[type='number']");
 
     inputs.forEach((input, index) => {
       if (index <= 1) {
-        input.style.border = "2px solid red";
+        input.style.border = "2px solid #dc3545";
         input.style.borderRadius = "2px";
       }
     });
@@ -138,7 +156,7 @@ function wftCaculator() {
 
   const wft = (dft * (100 + thinner)) / solidVolume;
 
-  document.getElementById("wftOutput").value = wft ? wft?.toFixed(2) : "";
+  document.getElementById("wftOutput").value = wft ? Math.round(wft) : "";
 }
 
 function reset() {
@@ -146,4 +164,138 @@ function reset() {
     input.value = "";
   });
   document.getElementById("wftOutput").value = "";
+}
+
+//paint coverage calculation
+
+function paintCoverageCalculator() {
+  const dft =
+    parseFloat(
+      document.querySelectorAll("#paint input[type='number']")[0].value
+    ) || 0;
+  const solidVolume =
+    parseFloat(
+      document.querySelectorAll("#paint input[type='number']")[1].value
+    ) || 0;
+  if (solidVolume >= 100) {
+    setTimeout(() => {
+      document.getElementById("paintSolidError").innerText = "";
+    }, 2000);
+    document.getElementById("paintSolidError").style.color = "#dc3545";
+    return (document.getElementById("paintSolidError").innerText =
+      "Solid Volume cannot exceed 100%");
+  }
+  const loss =
+    parseFloat(
+      document.querySelectorAll("#paint input[type='number']")[2].value
+    ) || 0;
+
+  if (!dft || !solidVolume || !loss) {
+    const inputs = document.querySelectorAll("#paint input[type='number']");
+
+    inputs.forEach((input, index) => {
+      if (index <= 2) {
+        input.style.border = "2px solid #dc3545";
+        input.style.borderRadius = "2px";
+      }
+    });
+
+    setTimeout(() => {
+      inputs.forEach((input, index) => {
+        if (index <= 2) {
+          input.style.border = "1px solid #000";
+          input.style.borderRadius = "2px";
+        }
+      });
+    }, 3000);
+    return;
+  }
+
+  const theoritical = (Number(solidVolume || 0) * 10) / dft;
+  const practical =
+    Number(theoritical || 0) - (Number(theoritical || 0) * loss) / dft;
+
+  document.getElementById("paintOutput").value = theoritical
+    ? `${Math.round(theoritical)} sq.m./liter`
+    : "";
+  document.getElementById("paint2Output").value = practical
+    ? `${Math.round(practical)} sq.m./liter`
+    : "";
+}
+
+function resetPaint() {
+  document.querySelectorAll("input[type='number']").forEach((input) => {
+    input.value = "";
+  });
+  document.getElementById("paintOutput").value = "";
+  document.getElementById("paint2Output").value = "";
+}
+
+// paint consumption calculation
+
+function paintConsumptionCalculator() {
+  const surfaceArea =
+    parseFloat(
+      document.querySelectorAll("#consumption input[type='number']")[0].value
+    ) || 0;
+  const dft =
+    parseFloat(
+      document.querySelectorAll("#consumption input[type='number']")[1].value
+    ) || 0;
+  const solidVolume =
+    parseFloat(
+      document.querySelectorAll("#consumption input[type='number']")[2].value
+    ) || 0;
+  if (solidVolume >= 100) {
+    setTimeout(() => {
+      document.getElementById("paint2SolidError").innerText = "";
+    }, 2000);
+    document.getElementById("paint2SolidError").style.color = "#dc3545";
+    return (document.getElementById("paint2SolidError").innerText =
+      "Solid Volume cannot exceed 100%");
+  }
+  const loss =
+    parseFloat(
+      document.querySelectorAll("#consumption input[type='number']")[3].value
+    ) || 0;
+
+  if (!surfaceArea || !dft || !solidVolume || !loss) {
+    const inputs = document.querySelectorAll(
+      "#consumption input[type='number']"
+    );
+
+    inputs.forEach((input, index) => {
+      if (index <= 3) {
+        input.style.border = "2px solid #dc3545";
+        input.style.borderRadius = "2px";
+      }
+    });
+
+    setTimeout(() => {
+      inputs.forEach((input, index) => {
+        if (index <= 3) {
+          input.style.border = "1px solid #000";
+          input.style.borderRadius = "2px";
+        }
+      });
+    }, 3000);
+    return;
+  }
+
+  const theoritical = (Number(solidVolume || 0) * 10) / dft;
+  const practical =
+    Number(theoritical || 0) - (Number(theoritical || 0) * loss) / dft;
+
+  const paintConsumption = Number(surfaceArea || 0) / Number(practical || 0);
+
+  document.getElementById("consumptionOutput").value = theoritical
+    ? `${Math.round(paintConsumption)} liters`
+    : "";
+}
+
+function resetConsumption() {
+  document.querySelectorAll("input[type='number']").forEach((input) => {
+    input.value = "";
+  });
+  document.getElementById("consumptionOutput").value = "";
 }
