@@ -431,6 +431,13 @@ footer {
   background-position: center center;
   color: #ffffff;
 }
+#speakers {
+  background: url("../images/register-bg.jpg") 50% 0 repeat-y fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  color: #ffffff;
+}
 
 #register .form-control {
   background: transparent;
@@ -527,7 +534,7 @@ footer {
    Venue section              
 -----------------------------------------*/
 #venue {
-  background: url("../images/venue-bg.jpg") 50% 0 repeat-y fixed;
+  background: url("../images/About/venue-bg.jpg") 50% 0 repeat-y fixed;
   background-size: cover;
   background-position: center center;
   padding-top: 7rem;
