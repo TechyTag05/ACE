@@ -85,12 +85,19 @@ function showForm(id) {
   if (id === "wft") {
     resetPaint();
     resetConsumption();
+    resetPsychrometric();
   } else if (id === "paint") {
     reset();
     resetConsumption();
+    resetPsychrometric();
   } else if (id === "consumption") {
     reset();
     resetPaint();
+    resetPsychrometric();
+  } else if (id === "psychrometric") {
+    reset();
+    resetPaint();
+    resetConsumption();
   }
   document.querySelectorAll(".form-content").forEach((form) => {
     form.classList.remove("active");
@@ -102,7 +109,7 @@ function showForm(id) {
     wft: "btn1",
     paint: "btn2",
     consumption: "btn3",
-    // mixing: "btn4",
+    psychrometric: "btn4",
   };
 
   buttons.forEach((btn) => {
@@ -299,3 +306,149 @@ function resetConsumption() {
   });
   document.getElementById("consumptionOutput").value = "";
 }
+
+// pyschrometric calculator
+
+// --- Constants ---
+const R_da = 287.05; // J/kgK gas constant dry air
+const omega = 0.62198; // molecular mass ratio
+
+// --- Pressure from altitude (ISA model) ---
+function pressureFromAltitude(alt) {
+  const T0 = 288.15,
+    P0 = 101325,
+    L = 0.0065,
+    g = 9.80665,
+    R = 287.05;
+  return P0 * Math.pow(1 - (L * alt) / T0, g / (R * L));
+}
+
+// --- Saturation vapor pressure (Buck equation) ---
+function esat(Tc) {
+  return 611.21 * Math.exp((18.678 - Tc / 234.5) * (Tc / (257.14 + Tc)));
+}
+
+// --- Humidity ratio from vapor pressure ---
+function W_from_e(e, P) {
+  return (omega * e) / (P - e);
+}
+
+// --- Dew point from vapor pressure (Newton iteration) ---
+function Tdp_from_e(e) {
+  let T = 20; // better initial guess
+  for (let i = 0; i < 30; i++) {
+    const f = esat(T) - e;
+    const df = (esat(T + 0.01) - esat(T)) / 0.01;
+    T -= f / df;
+    if (Math.abs(f) < 1e-3) break;
+  }
+  return T;
+}
+
+// --- Main compute function ---
+function compute({ Tdb, Twb, RH, Tdp, alt }) {
+  const P = pressureFromAltitude(alt);
+  let e;
+
+  if (!isNaN(Tdp)) {
+    e = esat(Tdp);
+  } else if (!isNaN(RH)) {
+    e = (RH / 100) * esat(Tdb);
+  } else if (!isNaN(Twb)) {
+    const es_wb = esat(Twb);
+    const gamma = 0.00066 * (1 + 0.00115 * Twb);
+    e = es_wb - gamma * P * (Tdb - Twb);
+  } else {
+    throw new Error("Provide RH, Twb, or Tdp");
+  }
+
+  const es_db = esat(Tdb);
+  const W = W_from_e(e, P);
+  const RH_calc = (e / es_db) * 100;
+  const Tdp_calc = Tdp || Tdp_from_e(e);
+
+  // Enthalpy (kJ/kg dry air) — ASHRAE approximation
+  const h = 1.005 * Tdb + W * (2500 + 1.88 * Tdb);
+
+  // Specific volume (m³/kg dry air)
+  const v = (R_da * (Tdb + 273.15) * (1 + 1.6078 * W)) / P;
+  const rho = 1 / v;
+
+  return {
+    Tdb,
+    Twb,
+    RH: RH_calc,
+    Tdp: Tdp_calc,
+    P,
+    e,
+    es: es_db,
+    W,
+    h,
+    v,
+    rho,
+  };
+}
+
+// --- Hook into your form ---
+function psychrometricCalculator() {
+  const Tdb = parseFloat(document.getElementById("Tdb").value);
+  const Twb = parseFloat(document.getElementById("Twb").value);
+  const RH = parseFloat(document.getElementById("RH").value);
+  const Tdp = parseFloat(document.getElementById("Tdp").value);
+  const alt = parseFloat(document.getElementById("alt").value) || 0;
+
+  if (isNaN(Tdb)) {
+    document.getElementById("out").textContent = "Enter Dry bulb temperature.";
+    return;
+  }
+
+  try {
+    const r = compute({ Tdb, Twb, RH, Tdp, alt });
+    //     document.getElementById("out").textContent = `Dry bulb: ${r.Tdb.toFixed(
+    //       1
+    //     )} °C
+    // Wet bulb: ${isNaN(Twb) ? "calculated" : Twb.toFixed(1)} °C
+    // RH: ${r.RH.toFixed(1)} %
+    // Dew point: ${r.Tdp.toFixed(1)} °C
+
+    // Pressure: ${r.P.toFixed(0)} Pa
+    // Vapor pressure: ${r.e.toFixed(1)} Pa
+    // Humidity ratio W: ${r.W.toFixed(5)} kg/kg dry air
+    // Enthalpy h: ${r.h.toFixed(2)} kJ/kg dry air
+    // Specific volume: ${r.v.toFixed(4)} m³/kg dry air
+    // Density: ${r.rho.toFixed(4)} kg/m³`;
+    document.getElementById("out").innerHTML = `
+  <table class="results-table">
+    <tr><th>Property</th><th>Value</th></tr>
+    <tr><td>Dry bulb</td><td>${r.Tdb.toFixed(1)} °C</td></tr>
+    <tr><td>Wet bulb</td><td>${
+      isNaN(Twb) ? "calculated" : Twb.toFixed(1)
+    } °C</td></tr>
+    <tr><td>Relative Humidity</td><td>${r.RH.toFixed(1)} %</td></tr>
+    <tr><td>Dew point</td><td>${r.Tdp.toFixed(1)} °C</td></tr>
+    <tr><td>Pressure</td><td>${r.P.toFixed(0)} Pa</td></tr>
+    <tr><td>Vapor pressure</td><td>${r.e.toFixed(1)} Pa</td></tr>
+    <tr><td>Humidity ratio W</td><td>${r.W.toFixed(5)} kg/kg dry air</td></tr>
+    <tr><td>Enthalpy h</td><td>${r.h.toFixed(2)} kJ/kg dry air</td></tr>
+    <tr><td>Specific volume</td><td>${r.v.toFixed(4)} m³/kg dry air</td></tr>
+    <tr><td>Density</td><td>${r.rho.toFixed(4)} kg/m³</td></tr>
+  </table>
+`;
+  } catch (err) {
+    document.getElementById("out").textContent = err.message;
+  }
+}
+
+// --- Reset button ---
+function resetPsychrometric() {
+  ["Tdb", "Twb", "RH", "Tdp", "alt"].forEach(
+    (id) => (document.getElementById(id).value = "")
+  );
+  document.getElementById("out").textContent = "";
+}
+// document.getElementById("psy_reset").onclick = () => {
+//   ["Tdb", "Twb", "RH", "Tdp", "alt"].forEach(
+//     (id) => (document.getElementById(id).value = "")
+//   );
+//   document.getElementById("out").textContent = "";
+// };
