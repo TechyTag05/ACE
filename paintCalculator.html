@@ -73,8 +73,7 @@
                 <button id="btn1" class="mystyle" onclick="showForm('wft')">> WFT Calculation</button>
                 <button id="btn2" onclick="showForm('paint')">> Paint Coverage</button>
                 <button id="btn3" onclick="showForm('consumption')">> Paint Consumption</button>
-                <!--  
-                <button id="btn4" onclick="showForm('mixing')">> Paint Mixing Ratio</button> -->
+                <button id="btn4" onclick="showForm('psychrometric')">> Psychrometric Calculator </button>
             </div>
 
             <div class="form-area">
@@ -167,6 +166,41 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Paint Consumption:</label><input id="consumptionOutput" type="text" disabled />
+                            </div>
+                        </div>
+                        <button class="action">Generate PDF</button>
+                    </div>
+                </form>
+
+                <form>
+                    <div id="psychrometric" class="form-content">
+                        <h3>Psychrometric Calculator</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Dry bulb temp (°C)*</label><input id="Tdb" type="number" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Wet bulb temp (°C)</label><input id="Twb" type="number" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Relative Humidity (%)</label><input id="RH" type="number" min="1" max="100" />
+                                <p id="paint2SolidError"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Dew point temp (°C)</label><input id="Tdp" type="number" min="1" max="100" />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Altitude (m)</label><input id="alt" type="number" min="1" max="100" />
+                            </div>
+                        </div>
+                        <button type="submit" class="action"
+                            onclick="event.preventDefault(); psychrometricCalculator()">CALCULATE</button>
+                        <button class="action" type="button" onclick="resetPsychrometric()">Reset</button>
+                        <h3>Output</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="results" id="out"></div>
+                                <!-- <label>Paint Consumption:</label><input id="consumptionOutput" type="text" disabled /> -->
                             </div>
                         </div>
                         <button class="action">Generate PDF</button>
