@@ -86,30 +86,40 @@ function showForm(id) {
     resetPaint();
     resetConsumption();
     resetPsychrometric();
+    dftReset();
+  } else if (id === "wftdft") {
+    reset();
+    resetConsumption();
+    resetPsychrometric();
+    resetPaint();
   } else if (id === "paint") {
     reset();
     resetConsumption();
     resetPsychrometric();
+    dftReset();
   } else if (id === "consumption") {
     reset();
     resetPaint();
     resetPsychrometric();
+    dftReset();
   } else if (id === "psychrometric") {
     reset();
     resetPaint();
     resetConsumption();
+    dftReset();
   }
   document.querySelectorAll(".form-content").forEach((form) => {
     form.classList.remove("active");
   });
   document.getElementById(id).classList.add("active");
 
-  const buttons = ["btn1", "btn2", "btn3", "btn4"];
+  const buttons = ["btn1", "btn2", "btn3", "btn4", "btn5"];
   const activeMap = {
     wft: "btn1",
     paint: "btn2",
     consumption: "btn3",
     psychrometric: "btn4",
+    wftdft: "btn5",
   };
 
   buttons.forEach((btn) => {
@@ -121,11 +131,11 @@ function showForm(id) {
 function wftCaculator() {
   const dft =
     parseFloat(
-      document.querySelectorAll("#wft input[type='number']")[0].value
+      document.querySelectorAll("#wft input[type='number']")[0].value,
     ) || 0;
   const solidVolume =
     parseFloat(
-      document.querySelectorAll("#wft input[type='number']")[1].value
+      document.querySelectorAll("#wft input[type='number']")[1].value,
     ) || 0;
   if (solidVolume >= 100) {
     setTimeout(() => {
@@ -137,7 +147,7 @@ function wftCaculator() {
   }
   const thinner =
     parseFloat(
-      document.querySelectorAll("#wft input[type='number']")[2].value
+      document.querySelectorAll("#wft input[type='number']")[2].value,
     ) || 0;
 
   if (!dft || !solidVolume) {
@@ -166,6 +176,53 @@ function wftCaculator() {
   document.getElementById("wftOutput").value = wft ? Math.round(wft) : "";
 }
 
+function dftCaculator() {
+  const dft =
+    parseFloat(
+      document.querySelectorAll("#wftdft input[type='number']")?.[0]?.value,
+    ) || 0;
+  const solidVolume =
+    parseFloat(
+      document.querySelectorAll("#wftdft input[type='number']")?.[1]?.value,
+    ) || 0;
+  if (solidVolume >= 100) {
+    setTimeout(() => {
+      document.getElementById("solidError").innerText = "";
+    }, 2000);
+    document.getElementById("solidError").style.color = "#dc3545";
+    return (document.getElementById("solidError").innerText =
+      "Solid Volume cannot exceed 100%");
+  }
+  const thinner =
+    parseFloat(
+      document.querySelectorAll("#wftdft input[type='number']")[2]?.value,
+    ) || 0;
+
+  if (!dft || !solidVolume) {
+    const inputs = document.querySelectorAll("#wftdft input[type='number']");
+
+    inputs.forEach((input, index) => {
+      if (index <= 1) {
+        input.style.border = "2px solid #dc3545";
+        input.style.borderRadius = "2px";
+      }
+    });
+
+    setTimeout(() => {
+      inputs.forEach((input, index) => {
+        if (index <= 1) {
+          input.style.border = "1px solid #000";
+          input.style.borderRadius = "2px";
+        }
+      });
+    }, 3000);
+    return;
+  }
+  const dft_ = (dft * solidVolume) / (100 + thinner);
+
+  document.getElementById("dftOutput").value = dft_ ? Math.round(dft_) : "";
+}
+
 function reset() {
   document.querySelectorAll("input[type='number']").forEach((input) => {
     input.value = "";
@@ -173,16 +230,23 @@ function reset() {
   document.getElementById("wftOutput").value = "";
 }
 
+function dftReset() {
+  document.querySelectorAll("input[type='number']").forEach((input) => {
+    input.value = "";
+  });
+  document.getElementById("dftOutput").value = "";
+}
+
 //paint coverage calculation
 
 function paintCoverageCalculator() {
   const dft =
     parseFloat(
-      document.querySelectorAll("#paint input[type='number']")[0].value
+      document.querySelectorAll("#paint input[type='number']")[0].value,
     ) || 0;
   const solidVolume =
     parseFloat(
-      document.querySelectorAll("#paint input[type='number']")[1].value
+      document.querySelectorAll("#paint input[type='number']")[1].value,
     ) || 0;
   if (solidVolume >= 100) {
     setTimeout(() => {
@@ -194,7 +258,7 @@ function paintCoverageCalculator() {
   }
   const loss =
     parseFloat(
-      document.querySelectorAll("#paint input[type='number']")[2].value
+      document.querySelectorAll("#paint input[type='number']")[2].value,
     ) || 0;
 
   if (!dft || !solidVolume || !loss) {
@@ -243,15 +307,15 @@ function resetPaint() {
 function paintConsumptionCalculator() {
   const surfaceArea =
     parseFloat(
-      document.querySelectorAll("#consumption input[type='number']")[0].value
+      document.querySelectorAll("#consumption input[type='number']")[0].value,
     ) || 0;
   const dft =
     parseFloat(
-      document.querySelectorAll("#consumption input[type='number']")[1].value
+      document.querySelectorAll("#consumption input[type='number']")[1].value,
     ) || 0;
   const solidVolume =
     parseFloat(
-      document.querySelectorAll("#consumption input[type='number']")[2].value
+      document.querySelectorAll("#consumption input[type='number']")[2].value,
     ) || 0;
   if (solidVolume >= 100) {
     setTimeout(() => {
@@ -263,12 +327,12 @@ function paintConsumptionCalculator() {
   }
   const loss =
     parseFloat(
-      document.querySelectorAll("#consumption input[type='number']")[3].value
+      document.querySelectorAll("#consumption input[type='number']")[3].value,
     ) || 0;
 
   if (!surfaceArea || !dft || !solidVolume || !loss) {
     const inputs = document.querySelectorAll(
-      "#consumption input[type='number']"
+      "#consumption input[type='number']",
     );
 
     inputs.forEach((input, index) => {
@@ -442,7 +506,7 @@ function psychrometricCalculator() {
 // --- Reset button ---
 function resetPsychrometric() {
   ["Tdb", "Twb", "RH", "Tdp", "alt"].forEach(
-    (id) => (document.getElementById(id).value = "")
+    (id) => (document.getElementById(id).value = ""),
   );
   document.getElementById("out").textContent = "";
 }
