@@ -70,10 +70,11 @@
         <div class="paint-container">
             <div class="paint-sidebar">
                 <h2>Paint Calculator</h2>
-                <button id="btn1" class="mystyle" onclick="showForm('wft')">> WFT Calculation</button>
-                <button id="btn2" onclick="showForm('paint')">> Paint Coverage</button>
-                <button id="btn3" onclick="showForm('consumption')">> Paint Consumption</button>
-                <button id="btn4" onclick="showForm('psychrometric')">> Psychrometric Calculator </button>
+                <button id="btn1" class="mystyle" onclick="showForm('wft')"> WFT Calculation</button>
+                <button id="btn5" onclick="showForm('wftdft')"> DFT Calculation</button>
+                <button id="btn2" onclick="showForm('paint')"> Paint Coverage</button>
+                <button id="btn3" onclick="showForm('consumption')"> Paint Consumption</button>
+                <button id="btn4" onclick="showForm('psychrometric')"> Psychrometric Calculator </button>
             </div>
 
             <div class="form-area">
@@ -101,6 +102,35 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label>WFT Target (%)</label><input id="wftOutput" type="number" disabled />
+                            </div>
+                        </div>
+                        <button class="action">Generate PDF</button>
+                    </div>
+                </form>
+
+                <form>
+                    <div id="wftdft" class="form-content ">
+                        <h3>DFT Calculation</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>WFT in Microns*</label><input id="wftMicrons" type="number" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Volume of solids in (%)*</label><input id="solidVolume" type="number" required
+                                    min="1" max="100" />
+                                <p id="solidError"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Thinner Add (%)</label><input id="thinner" type="number" />
+                            </div>
+                        </div>
+                        <button type="submit" class="action"
+                            onclick="event.preventDefault(); dftCaculator()">CALCULATE</button>
+                        <button class="action" type="button" onclick="dftReset()">Reset</button>
+                        <h3>Output</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>DFT Target (%)</label><input id="dftOutput" type="number" disabled />
                             </div>
                         </div>
                         <button class="action">Generate PDF</button>
